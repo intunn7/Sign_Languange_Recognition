@@ -1,0 +1,5 @@
+mediapipe
+# pickle5
+opencv-python
+matplotlib
+numpy
