@@ -40,6 +40,7 @@ Komunikasi adalah kebutuhan dasar manusia sebagai makhluk sosial. Namun, penyand
 ## 📊 Dataset
 
 Dataset diperoleh dari **Kaggle** dengan judul "Sign Language Alphabet Dataset".
+Link: https://www.kaggle.com/datasets/ahmedkhanak1995/sign-language-gesture-images-dataset
 
 ### Spesifikasi Dataset
 
@@ -50,22 +51,6 @@ Dataset diperoleh dari **Kaggle** dengan judul "Sign Language Alphabet Dataset".
 | **Gambar per Kelas** | 1,500 gambar |
 | **Resolusi** | 50×50 piksel (diubah menjadi 250×250) |
 | **Format** | RGB dan Binary (threshold) |
-
-### Komposisi Dataset
-
-```
-📁 Dataset
-├── 📂 Folder 1: Gambar RGB (50×50 px)
-│   ├── A (1,500 gambar)
-│   ├── B (1,500 gambar)
-│   ├── ...
-│   ├── Z (1,500 gambar)
-│   ├── 0-9 (1,500 gambar masing-masing)
-│   └── _ /spasi (1,500 gambar)
-│
-└── 📂 Folder 2: Gambar Binary (hasil preprocessing)
-    └── (Struktur sama dengan Folder 1)
-```
 
 
 ## 🔬 Metodologi
@@ -90,13 +75,6 @@ Dataset diperoleh dari **Kaggle** dengan judul "Sign Language Alphabet Dataset".
 - **Grayscale**: Konversi RGB → grayscale untuk menghilangkan noise warna
 - **Thresholding (Otsu)**: Menghasilkan citra biner (hitam-putih) untuk memisahkan objek tangan dari latar belakang
 
-<div align="center">
-
-| RGB | Grayscale | Binary (Otsu) |
-|:---:|:---------:|:-------------:|
-| <img src="https://via.placeholder.com/150x150/FF5722/FFFFFF?text=RGB" width="150"> | <img src="https://via.placeholder.com/150x150/9E9E9E/FFFFFF?text=Gray" width="150"> | <img src="https://via.placeholder.com/150x150/000000/FFFFFF?text=Binary" width="150"> |
-
-</div>
 
 #### 2️⃣ Ekstraksi Fitur dengan MediaPipe Hands
 
@@ -107,10 +85,6 @@ MediaPipe mendeteksi **21 titik landmark** pada tangan:
 - Pergelangan tangan (wrist)
 
 Setiap landmark memiliki koordinat **(x, y)** → Total **42 fitur** per gambar (21 × 2).
-
-<div align="center">
-  <img src="https://via.placeholder.com/400x300/4CAF50/FFFFFF?text=21+Hand+Landmarks" alt="MediaPipe Landmarks">
-</div>
 
 **Keunggulan MediaPipe:**
 - ✅ Stabil terhadap variasi pencahayaan
