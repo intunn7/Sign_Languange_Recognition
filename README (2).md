@@ -5,24 +5,6 @@
 [![MediaPipe](https://img.shields.io/badge/MediaPipe-latest-green.svg)](https://mediapipe.dev/)
 [![OpenCV](https://img.shields.io/badge/OpenCV-4.5+-red.svg)](https://opencv.org/)
 
-<div align="center">
-  <img src="https://via.placeholder.com/800x400/4CAF50/FFFFFF?text=SIBI+Sign+Language+Recognition" alt="SIBI Recognition Banner">
-</div>
-
-## 📋 Daftar Isi
-- [Ringkasan](#-ringkasan)
-- [Latar Belakang](#-latar-belakang)
-- [Fitur Utama](#-fitur-utama)
-- [Dataset](#-dataset)
-- [Metodologi](#-metodologi)
-- [Hasil & Performa](#-hasil--performa)
-- [Instalasi](#-instalasi)
-- [Cara Penggunaan](#-cara-penggunaan)
-- [Dokumentasi](#-dokumentasi)
-- [Tim Pengembang](#-tim-pengembang)
-- [Referensi](#-referensi)
-- [Lisensi](#-lisensi)
-
 ## 🎯 Ringkasan
 
 Sistem Pengenalan Bahasa Isyarat Indonesia (SIBI) adalah aplikasi berbasis **Random Forest** yang mampu mengenali gerakan tangan untuk alfabet A-Z, angka 0-9, dan spasi dalam bahasa isyarat secara **real-time**. Sistem ini dikembangkan untuk membantu komunikasi antara penyandang tunarungu dengan masyarakat umum.
@@ -85,13 +67,6 @@ Dataset diperoleh dari **Kaggle** dengan judul "Sign Language Alphabet Dataset".
     └── (Struktur sama dengan Folder 1)
 ```
 
-<div align="center">
-
-| Contoh Gesture Tangan |
-|:---------------------:|
-| <img src="https://via.placeholder.com/100x100/FF5722/FFFFFF?text=A" width="80"> <img src="https://via.placeholder.com/100x100/3F51B5/FFFFFF?text=B" width="80"> <img src="https://via.placeholder.com/100x100/4CAF50/FFFFFF?text=C" width="80"> <img src="https://via.placeholder.com/100x100/FFC107/000000?text=5" width="80"> |
-
-</div>
 
 ## 🔬 Metodologi
 
@@ -304,118 +279,6 @@ python real_time_detection.py --model models/rf_model.pkl --camera 0
 2. Webcam akan aktif
 3. Tunjukkan gesture tangan di depan kamera
 4. Prediksi akan muncul secara real-time di layar
-5. Tekan `q` untuk keluar
-
-<div align="center">
-  <img src="https://via.placeholder.com/600x400/2196F3/FFFFFF?text=Real-Time+Detection+Demo" alt="Real-time Demo">
-</div>
-
-## 📚 Dokumentasi
-
-### Struktur Project
-
-```
-sibi-sign-language-recognition/
-│
-├── data/
-│   ├── raw/                    # Dataset asli
-│   ├── processed/              # Gambar hasil preprocessing
-│   └── features.pkl            # Fitur hasil ekstraksi
-│
-├── models/
-│   ├── rf_model.pkl           # Model Random Forest terlatih
-│   └── dt_model.pkl           # Model Decision Tree (optional)
-│
-├── src/
-│   ├── preprocessing.py        # Script pre-processing
-│   ├── feature_extraction.py  # Ekstraksi fitur MediaPipe
-│   ├── train_model.py         # Training Random Forest
-│   ├── evaluate_model.py      # Evaluasi model
-│   └── real_time_detection.py # Deteksi real-time
-│
-├── notebooks/
-│   ├── EDA.ipynb              # Exploratory Data Analysis
-│   └── Model_Comparison.ipynb # Perbandingan model
-│
-├── docs/
-│   ├── laporan_uts.pdf        # Laporan lengkap
-│   └── presentasi.pdf         # Slide presentasi
-│
-├── requirements.txt            # Python dependencies
-├── README.md                   # Dokumentasi ini
-└── LICENSE                     # Lisensi project
-```
-
-### Contoh Kode: Feature Extraction
-
-```python
-import mediapipe as mp
-import cv2
-import numpy as np
-
-mp_hands = mp.solutions.hands
-hands = mp_hands.Hands(static_image_mode=True, max_num_hands=1)
-
-def extract_landmarks(image_path):
-    image = cv2.imread(image_path)
-    image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    
-    results = hands.process(image_rgb)
-    
-    if results.multi_hand_landmarks:
-        landmarks = []
-        for hand_landmarks in results.multi_hand_landmarks:
-            for lm in hand_landmarks.landmark:
-                landmarks.extend([lm.x, lm.y])
-        return landmarks
-    return None
-```
-
-### Contoh Kode: Training Random Forest
-
-```python
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-import pickle
-
-# Load data
-with open('data/features.pkl', 'rb') as f:
-    data = pickle.load(f)
-
-X = data['features']
-y = data['labels']
-
-# Split data
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
-)
-
-# Train model
-rf_model = RandomForestClassifier(
-    n_estimators=100,
-    max_depth=None,
-    criterion='gini',
-    random_state=42
-)
-
-rf_model.fit(X_train, y_train)
-
-# Save model
-with open('models/rf_model.pkl', 'wb') as f:
-    pickle.dump(rf_model, f)
-```
-
-## 👥 Tim Pengembang
-
-**Kelas 2023B - Program Studi S1 Sains Data**  
-**Fakultas Matematika dan Ilmu Pengetahuan Alam**  
-**Universitas Negeri Surabaya**
-
-| Nama | NIM | Role |
-|------|-----|------|
-| Tanti Ayu Hardiningtyas | 23031554002 | Project Lead & ML Engineer |
-| Intan Ayu Lestari | 23031554051 | Data Scientist & Researcher |
-| Dimas Fatkhul Rahman | 23031554211 | Developer & System Integrator |
 
 ## 📝 Kesimpulan
 
@@ -432,55 +295,4 @@ Sistem pengenalan bahasa isyarat SIBI berbasis Random Forest ini berhasil mencap
 - 🎓 Dapat digunakan sebagai alat bantu pembelajaran SIBI
 - 🌍 Mendukung terciptanya lingkungan inklusif untuk penyandang disabilitas
 
-## 🔮 Pengembangan Selanjutnya
 
-- [ ] Menambahkan gesture dinamis (gerakan kata)
-- [ ] Integrasi dengan aplikasi mobile
-- [ ] Dataset lebih beragam dengan variasi pencahayaan
-- [ ] Implementasi deep learning (CNN) untuk perbandingan
-- [ ] Sistem text-to-speech untuk output suara
-- [ ] Deployment ke edge devices (Raspberry Pi)
-
-## 📚 Referensi
-
-1. Erissa, D., & Widinarsih, D. (2022). Akses Penyandang Disabilitas Terhadap Pekerjaan. *Jurnal Pembangunan Manusia*, 3(1). [Link](https://scholarhub.ui.ac.id/jpm/vol3/iss1/28)
-
-2. Nofiturrahmah, F. (2018). Problematika Anak Tunarungu Dan Cara Mengatasinya. *Quality*, 6(1), 1-15. [DOI](http://dx.doi.org/10.21043/quality.v6i1.5744)
-
-3. WHO. (2025). Deafness and Hearing Loss. [Link](https://www.who.int/news-room/fact-sheets/detail/deafness-and-hearing-loss)
-
-4. Das, S., et al. (2023). A hybrid approach for Bangla sign language recognition using deep transfer learning model with random forest classifier. *Expert Systems with Applications*, 213(B), 118914. [DOI](https://doi.org/10.1016/j.eswa.2022.118914)
-
-5. Wiraswendro, P. E., & Soetanto, H. (2022). Penerapan Algoritma Random Forest Classifier pada Sistem Deteksi Simbol SIBI. *Jurnal BIT*, 19(2), 75-81. [Link](https://journal.budiluhur.ac.id/index.php/bit/article/view/2043/)
-
-6. Mulyana, D. I., et al. (2025). Optimasi Deteksi Gerak Bahasa Isyarat dan Ekspresi Wajah Real Time Dengan Metode Random Forest. *Jurnal JTIK*, 9(1), 277-284. [DOI](https://doi.org/10.35870/jtik.v9i1.3188)
-
-7. Suyudi, I., et al. (2022). Pengenalan Bahasa Isyarat Indonesia menggunakan Mediapipe dengan Model Random Forest. *JISTED*, 1(1), 65-80. [DOI](https://doi.org/10.35912/jisted.v1i1.1899)
-
-*... dan 6 referensi lainnya (lihat laporan lengkap)*
-
-## 📄 Lisensi
-
-Project ini dilisensikan di bawah **MIT License** - lihat file [LICENSE](LICENSE) untuk detail.
-
-## 🙏 Acknowledgments
-
-- **Kaggle** untuk menyediakan dataset Sign Language Alphabet
-- **Google MediaPipe** untuk library hand landmark detection
-- **Universitas Negeri Surabaya** untuk dukungan akademik
-- **Dosen Pengolahan Citra Digital** untuk bimbingan proyek
-- **Komunitas Open Source** untuk tools dan libraries
-
----
-
-<div align="center">
-
-**⭐ Jika project ini bermanfaat, berikan star pada repository ini! ⭐**
-
-**💬 Ada pertanyaan? Buka [Issues](https://github.com/username/sibi-recognition/issues)**
-
-Dibuat dengan ❤️ oleh Mahasiswa Sains Data UNESA
-
-[📧 Email](mailto:datascience@unesa.ac.id) · [🌐 Website](https://datascience.unesa.ac.id)
-
-</div>
